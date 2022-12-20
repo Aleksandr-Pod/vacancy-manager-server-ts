@@ -70,13 +70,13 @@ const { CLIENT_ID, CLIENT_SECRET, BASE_URL, FRONTEND_URL } = process.env;
 
 module.exports.googleAuth = async(_req, res) => {
   console.log("googleAuth controller ...");
-  
+
   const stringifyedParams = queryString.stringify({
     client_id: CLIENT_ID,
     redirect_uri: `${BASE_URL}/auth/google-redirect`,
     scope: [
-      "https://googleapis.com/auth/userinfo.email",
-      "https://googleapis.com/auth/userinfo.profile"
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
     ].join(" "),
     response_type: "code",
     access_type: "offline",
