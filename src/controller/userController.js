@@ -88,11 +88,13 @@ module.exports.googleAuth = async(_req, res) => {
 }
 
 module.exports.googleRedirect = async(req, res) => {
-
+  console.log("googleRedirect ...");
   const fullURL = `${req.protocol}://${req.get("host")}${req.originalURL}`;
   const urlObj = new URL(fullURL);
   const { code } = queryString.parse(urlObj.search);
   // const code = urlParams.code
+  console.log("code:", code);
+
   const tokenData = await axios({
     url: "https://oauth2.googleapis.com/token",
     method: "post",
@@ -104,6 +106,7 @@ module.exports.googleRedirect = async(req, res) => {
       code
     }
   });
+  
   const userData = await axios ({
     url: "https://googleapis.com/oauth2/v2/userinfo",
     method: "get",
