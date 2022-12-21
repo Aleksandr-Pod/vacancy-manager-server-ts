@@ -84,11 +84,10 @@ module.exports.googleRedirect = (req, res) => __awaiter(void 0, void 0, void 0, 
     console.log("googleRedirect ...");
     // const fullURL = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
     // const urlObj = new URL(fullURL);
-    // console.log("urlObj: ", urlObj);
     // const urlParams = queryString.parse(urlObj.host);
-    // console.log("urlParams:", urlParams);
     const { code } = req.query;
     console.log("request code: ", code);
+    // getting tokenData (Access Token, RefreshToken ...)
     const tokenData = yield axios({
         url: "https://oauth2.googleapis.com/token",
         method: "post",
@@ -96,19 +95,19 @@ module.exports.googleRedirect = (req, res) => __awaiter(void 0, void 0, void 0, 
             client_id: CLIENT_ID,
             client_sectret: CLIENT_SECRET,
             redirect_uri: `${BASE_URL}/auth/google-redirect`,
-            grant_type: "authorization code",
+            grant_type: "authorization_code",
             code
         }
     });
-    const userData = yield axios({
-        url: "https://googleapis.com/oauth2/v2/userinfo",
-        method: "get",
-        headers: {
-            Authorization: `Bearer ${tokenData.data.access_token}`
-        }
-    });
-    if (!userData)
-        throw BadRequest("Google have no data");
+    console.log("TokenData: ", tokenData);
+    // const userData = await axios ({
+    //   url: "https://googleapis.com/oauth2/v2/userinfo",
+    //   method: "get",
+    //   headers: {
+    //     Authorization: `Bearer ${tokenData.data.access_token}`
+    //   }
+    // });
+    // if(!userData) throw BadRequest("Google have no data");
     // const getUser = UserModel.findOne({email: userData.data.email});
     // if (!getUser) {
     //   googleRegistration();
@@ -117,7 +116,8 @@ module.exports.googleRedirect = (req, res) => __awaiter(void 0, void 0, void 0, 
     // };
     res.json({
         message: "Google response",
-        userData
+        tokenData,
+        // userData
     });
     // return res.redirect(`${FRONTEND_URL}?email=${userData.data.email}`)
 });
