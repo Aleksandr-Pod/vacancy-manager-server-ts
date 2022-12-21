@@ -8,7 +8,7 @@ import authRouter from "./routes/authRouter";
 import quickLinksRouter from "./routes/quickLinks";
 
 const app = express();
-app.use(cors());
+app.use(cors({ credentials: true, origin: true }));
 // app.use((req: Request, res: Response, next: NextFunction) => {
 //   res.header("Access-Control-Allow-Origin", "*");
 //   res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");

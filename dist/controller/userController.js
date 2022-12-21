@@ -87,7 +87,6 @@ module.exports.googleRedirect = (req, res) => __awaiter(void 0, void 0, void 0, 
     // const urlParams = queryString.parse(urlObj.search);
     // const code = urlParams.code;
     const { code } = req.query;
-    console.log("request code: ", code);
     // getting tokenData (Access Token, RefreshToken ...)
     const credentials = {
         url: "https://oauth2.googleapis.com/token",

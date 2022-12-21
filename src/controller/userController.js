@@ -96,7 +96,6 @@ module.exports.googleRedirect = async(req, res) => {
   // const code = urlParams.code;
 
   const { code } = req.query;
-  console.log("request code: ", code);
   
   // getting tokenData (Access Token, RefreshToken ...)
   const credentials = {
@@ -111,7 +110,7 @@ module.exports.googleRedirect = async(req, res) => {
     }
   };
   console.log("Credentials:", credentials);
-  
+
   const tokenData = await axios(credentials);
   console.log("TokenData: ", tokenData)
 
