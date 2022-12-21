@@ -9,11 +9,11 @@ import quickLinksRouter from "./routes/quickLinks";
 
 const app = express();
 app.use(cors());
-app.use((req: Request, res: Response, next: NextFunction) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-})
+// app.use((req: Request, res: Response, next: NextFunction) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+//   res.header("Access-Control-Allow-Headers", "Content-Type");
+// })
 app.use(express.json());
 
 app.use("/", mainRouter);

@@ -81,10 +81,14 @@ module.exports.googleAuth = (_req, res) => __awaiter(void 0, void 0, void 0, fun
     return res.redirect(`https://accounts.google.com/o/oauth2/v2/auth?${stringifyedParams}`);
 });
 module.exports.googleRedirect = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const fullURL = `${req.protocol}://${req.get("host")}${req.originalURL}`;
-    const urlObj = new URL(fullURL);
-    const { code } = queryString.parse(urlObj.search);
-    // const code = urlParams.code
+    console.log("googleRedirect ...");
+    // const fullURL = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
+    // const urlObj = new URL(fullURL);
+    // console.log("urlObj: ", urlObj);
+    // const urlParams = queryString.parse(urlObj.host);
+    // console.log("urlParams:", urlParams);
+    const { code } = req.query;
+    console.log("request code: ", code);
     const tokenData = yield axios({
         url: "https://oauth2.googleapis.com/token",
         method: "post",

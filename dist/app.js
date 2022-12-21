@@ -20,6 +20,11 @@ const authRouter_1 = __importDefault(require("./routes/authRouter"));
 const quickLinks_1 = __importDefault(require("./routes/quickLinks"));
 const app = (0, express_1.default)();
 app.use(cors());
+// app.use((req: Request, res: Response, next: NextFunction) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+//   res.header("Access-Control-Allow-Headers", "Content-Type");
+// })
 app.use(express_1.default.json());
 app.use("/", mainRouter_1.default);
 app.use("/auth", authRouter_1.default);
