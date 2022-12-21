@@ -92,13 +92,14 @@ module.exports.googleRedirect = async(req, res) => {
 
   // const fullURL = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
   // const urlObj = new URL(fullURL);
-  // const urlParams = queryString.parse(urlObj.host);
+  // const urlParams = queryString.parse(urlObj.search);
+  // const code = urlParams.code;
 
   const { code } = req.query;
   console.log("request code: ", code);
   
   // getting tokenData (Access Token, RefreshToken ...)
-  const tokenData = await axios({
+  const credentials = {
     url: "https://oauth2.googleapis.com/token",
     method: "post",
     data: {
@@ -108,7 +109,10 @@ module.exports.googleRedirect = async(req, res) => {
       grant_type: "authorization_code",
       code
     }
-  });
+  };
+  console.log("Credentials:", credentials);
+  
+  const tokenData = await axios(credentials);
   console.log("TokenData: ", tokenData)
 
   // const userData = await axios ({
